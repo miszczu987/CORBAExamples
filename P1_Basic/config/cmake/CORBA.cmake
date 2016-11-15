@@ -1,0 +1,7 @@
+set(CORBA_PROVIDER "TAO")
+
+
+include(${CMAKE_CURRENT_LIST_DIR}/CORBA_${CORBA_PROVIDER}.cmake)
+
+add_definitions(-DCORBA_${CORBA_PROVIDER})
+
