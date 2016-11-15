@@ -11,7 +11,7 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 include(${PROJECT_SOURCE_DIR}/../cmake/CORBA.cmake)
 
 
-add_subdirectory("../Common" "${PROJECT_BINARY_DIR}/Common")
+#add_subdirectory("../Common" "${PROJECT_BINARY_DIR}/Common")
 
 include_directories(${CORBA_INCLUDE})
 
