@@ -15,7 +15,7 @@ add_subdirectory("../Common" "${PROJECT_BINARY_DIR}/Common")
 
 include_directories(${CORBA_INCLUDE})
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
