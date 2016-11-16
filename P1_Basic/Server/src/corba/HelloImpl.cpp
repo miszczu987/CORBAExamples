@@ -8,10 +8,14 @@
 
 
 HelloImpl::HelloImpl()
-{}
+{
+	CONSOLE("HelloImpl CONSTRUCTOR");
+}
 
 HelloImpl::~HelloImpl()
-{}
+{
+	CONSOLE("HelloImpl DESTRUCTOR");
+}
 
 char* HelloImpl::sendMsg(const char* message)
 {

@@ -5,7 +5,8 @@
 
 
 class HelloImpl:
-	public POA_CORBAHello::Echo
+	public POA_CORBAHello::Echo,
+	public PortableServer::RefCountServantBase
 {
 public:
 	HelloImpl();
