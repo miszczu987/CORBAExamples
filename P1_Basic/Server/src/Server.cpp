@@ -3,10 +3,9 @@
 
 #include "corba/HelloImpl.hpp"
 
+#include <exception>
 #include <iostream>
 #include <string>
-
-#include <csignal>
 
 #include <boost/thread.hpp>
 
@@ -16,24 +15,15 @@
 
 CORBA::ORB_var theORB;
 
-bool RUN = true;
-
 
 void orbRun()
 {
 	theORB->run();
 }
 
-void signalHandler(int)
-{
-	RUN = false;
-}
-
 
 int main(int argc, char* argv[])
 {
-	std::signal(SIGINT, signalHandler);
-
 	try
 	{
 		CONSOLE("Initialize ORB");
@@ -49,12 +39,19 @@ int main(int argc, char* argv[])
 		CONSOLE("Construct servant");
 		HelloImpl* helloImpl = new HelloImpl();
 
+		CONSOLE("A ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+
 		CONSOLE("Activate servant in POA");
 		PortableServer::ObjectId_var helloImplId = rootPOA->activate_object(helloImpl);
 
+		CONSOLE("B ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+
 		{
+			CONSOLE("Remove servant reference");
 			PortableServer::ServantBase_var _cleanup = helloImpl;
 		}
+
+		CONSOLE("C ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
@@ -64,12 +61,13 @@ int main(int argc, char* argv[])
 		CONSOLE("Servant IOR: " << helloImplIOR.in());
 
 
-		CONSOLE("Server READY");
+		CONSOLE("Start ORB thread");
 		boost::thread orbThread(orbRun);
-		while(RUN)
-		{
-			sleep(1);
-		}
+
+		CONSOLE("Server READY. Press ENTER to exit");
+		std::cin.get();
+
+		CONSOLE("Shutting down...");
 
 
 		CONSOLE("Deactivate servant in POA");
@@ -80,6 +78,7 @@ int main(int argc, char* argv[])
 		CONSOLE("Shutdown ORB");
 		theORB->shutdown(false);
 
+		CONSOLE("Join ORB thread");
 		orbThread.join();
 
 		CONSOLE("Destroy ORB");
@@ -88,6 +87,10 @@ int main(int argc, char* argv[])
 	catch(const CORBA::Exception& e)
 	{
 		CONSOLE("CORBA::Exception: " << e);
+	}
+	catch(const std::exception& e)
+	{
+		CONSOLE("std::exception: " << e.what());
 	}
 
 	return 0;
