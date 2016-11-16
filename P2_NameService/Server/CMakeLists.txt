@@ -8,7 +8,7 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 #set(CMAKE_CXX_STANDARD 11)
 
 
-include(${PROJECT_SOURCE_DIR}/../../CMake/CORBA.cmake)
+include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
 
 
 #add_subdirectory("../Common" "${PROJECT_BINARY_DIR}/Common")
