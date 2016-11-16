@@ -2,7 +2,7 @@
 
 NS_PORT="33333"
 
-#Options: TAO #//TODO: VB
+#Options: TAO
 NS_PROVIDER="TAO"
 
 
