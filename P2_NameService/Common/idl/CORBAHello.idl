@@ -1,0 +1,11 @@
+module CORBAHello
+{
+
+	interface Echo
+	{
+		string sendMsg(in string message);
+		
+	};
+
+}; //CORBAHello ends
+
