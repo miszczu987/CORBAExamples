@@ -10,8 +10,8 @@ set(BUILD_SHARED_LIBS OFF)
 #set(CMAKE_CXX_STANDARD 11)
 
 
-include(${PROJECT_SOURCE_DIR}/../cmake/CORBA.cmake)
-include(${PROJECT_SOURCE_DIR}/../cmake/idl/CORBA_IDL.cmake)
+include(${PROJECT_SOURCE_DIR}/../../CMake/CORBA.cmake)
+include(${PROJECT_SOURCE_DIR}/../../CMake/idl/CORBA_IDL.cmake)
 
 
 include_directories(${IDL_OUT_DIR} ${CORBA_INCLUDE})
