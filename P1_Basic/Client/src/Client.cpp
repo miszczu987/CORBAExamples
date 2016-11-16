@@ -1,5 +1,4 @@
 #include <tao/corba.h>
-#include <tao/PortableServer/PortableServer.h>
 
 #include <CORBAHello.h>
 
@@ -20,12 +19,7 @@ int main(int argc, char* argv[])
 		CONSOLE("Initialize ORB");
 		theORB = CORBA::ORB_init(argc, argv);
 
-		CONSOLE("Obtain RootPOA");
-		CORBA::Object_var rootPOARef = theORB->resolve_initial_references("RootPOA");
-		PortableServer::POA_var rootPOA = PortableServer::POA::_narrow(rootPOARef.in());
-
 		std::string serverIOR;
-
 		std::cout << "Enter Server IOR: ";
 		std::cin >> serverIOR;
 
