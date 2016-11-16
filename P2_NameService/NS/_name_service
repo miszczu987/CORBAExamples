@@ -2,6 +2,9 @@
 
 NS_PORT="33333"
 
+#Options: TAO #//TODO: VB
+NS_PROVIDER="TAO"
+
 
 isNSWorking()
 {
