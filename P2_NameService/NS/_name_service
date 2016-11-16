@@ -1,0 +1,15 @@
+#name service
+
+NS_PORT="33333"
+
+
+isNSWorking()
+{
+	if [ -n "$(pidof ${NS_EXE})" ]
+	then
+		return 0
+	fi
+
+	return 1
+}
+
