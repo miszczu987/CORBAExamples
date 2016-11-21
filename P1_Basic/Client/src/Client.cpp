@@ -32,6 +32,9 @@ int main(int argc, char* argv[])
 
 		CONSOLE("Response from Server: " << echoString.in());
 
+		CONSOLE("Shutdown ORB");
+		theORB->shutdown(false);
+
 		CONSOLE("Destroy ORB");
 		theORB->destroy();
 	}
