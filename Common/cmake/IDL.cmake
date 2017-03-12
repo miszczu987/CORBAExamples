@@ -2,7 +2,7 @@ set(IDL_DIR "${PROJECT_SOURCE_DIR}/idl")
 set(IDL_OUT_DIR "${PROJECT_BINARY_DIR}/idl")
 file(MAKE_DIRECTORY ${IDL_OUT_DIR})
 
-include(${CMAKE_CURRENT_LIST_DIR}/CORBA_IDL_${CORBA_PROVIDER}.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/IDL_${CORBA_PROVIDER}.cmake)
 
 set(IDL_OUT_SUFFIXES ".h"
                      ".cpp"

@@ -11,7 +11,7 @@ set(BUILD_SHARED_LIBS OFF)
 
 
 include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/idl/CORBA_IDL.cmake)
+include(${PROJECT_SOURCE_DIR}/../../Common/cmake/IDL.cmake)
 
 
 include_directories(${IDL_OUT_DIR} ${CORBA_INCLUDE})
