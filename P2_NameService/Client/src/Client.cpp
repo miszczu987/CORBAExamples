@@ -38,6 +38,18 @@ int main(int argc, char* argv[])
 
 		CONSOLE("Response from Server: " << echoString.in());
 
+
+		CONSOLE("Requesting filling data for 5 persons");
+		CORBAHello::PersonDataSeq_var personData;
+		server->fillPersonDataSeq(5, personData.out());
+
+		CONSOLE("Got data for " << personData->length() << " persons:");
+		for(CORBA::ULong i = 0; i < personData->length(); ++i)
+		{
+			CONSOLE("  id=" << (*personData)[i].id << ", name=" << (*personData)[i].name.in());
+		}
+
+
 		CONSOLE("Shutdown ORB");
 		theORB->shutdown(false);
 
