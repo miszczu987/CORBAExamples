@@ -13,6 +13,7 @@ public:
 	virtual ~HelloImpl();
 
 	virtual char* sendMsg(const char* message);
+	virtual void fillPersonDataSeq(::CORBA::ULong size, ::CORBAHello::PersonDataSeq_out dataSeq);
 
 };
 
