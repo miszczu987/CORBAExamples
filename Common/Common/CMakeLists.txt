@@ -2,24 +2,24 @@ cmake_minimum_required(VERSION 3.1)
 
 project(Common)
 
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_VERBOSE_MAKEFILE OFF)
-
 set(BUILD_SHARED_LIBS OFF)
-
-#set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 
 include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
 include(${PROJECT_SOURCE_DIR}/../../Common/cmake/IDL.cmake)
+include(${PROJECT_SOURCE_DIR}/../../Common/cmake/outputs.cmake)
 
 
-include_directories(${IDL_OUT_DIR} ${CORBA_INCLUDE})
+include_directories(${PROJECT_SOURCE_DIR}/include
+                    ${IDL_OUT_DIR}
+                    ${CORBA_INCLUDE})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+file(GLOB_RECURSE SOURCE_FILES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
-add_library(${PROJECT_NAME} ${IDL_OUTPUTS})
+add_library(${PROJECT_NAME} ${SOURCE_FILES}
+                            ${IDL_OUTPUTS})
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${IDL_OUT_DIR}")
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include
+                                                  ${IDL_OUT_DIR})
 
