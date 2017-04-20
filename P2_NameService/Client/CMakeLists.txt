@@ -4,11 +4,10 @@ project(Client)
 
 
 include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
+include(${PROJECT_SOURCE_DIR}/../../Common/cmake/outputs.cmake)
 
 
 include_directories(${CORBA_INCLUDE})
-
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 

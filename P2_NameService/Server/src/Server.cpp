@@ -2,7 +2,7 @@
 #include <tao/PortableServer/PortableServer.h>
 #include <orbsvcs/CosNamingC.h>
 
-#include "corba/HelloImpl.hpp"
+#include <HelloImpl.hpp>
 
 #include <exception>
 #include <iostream>
