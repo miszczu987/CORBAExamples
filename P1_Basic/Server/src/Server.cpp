@@ -46,19 +46,17 @@ int main(int argc, char* argv[])
 
 		CONSOLE("B ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
-		{
-			CONSOLE("Remove servant reference");
-			PortableServer::ServantBase_var _cleanup = echoImpl;
-		}
+		CONSOLE("Remove servant reference");
+		echoImpl->_remove_ref();
 
 		CONSOLE("C ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
 
-		CORBA::Object_var echoImplRef = rootPOA->servant_to_reference(echoImpl);
-		CORBA::String_var echoImplIOR = theORB->object_to_string(echoImplRef);
-		CONSOLE("Servant IOR: " << echoImplIOR.in());
+		CORBA::Object_var echoRef = rootPOA->servant_to_reference(echoImpl);
+		CORBA::String_var echoIOR = theORB->object_to_string(echoRef.in());
+		CONSOLE("Servant IOR: " << echoIOR.in());
 
 
 		CONSOLE("Start ORB thread");
