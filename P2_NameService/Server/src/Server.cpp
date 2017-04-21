@@ -2,7 +2,7 @@
 #include <tao/PortableServer/PortableServer.h>
 #include <orbsvcs/CosNamingC.h>
 
-#include <HelloImpl.hpp>
+#include <EchoImpl.hpp>
 
 #include <exception>
 #include <iostream>
@@ -42,21 +42,21 @@ int main(int argc, char* argv[])
 		CosNaming::NamingContext_var nameService = CosNaming::NamingContext::_narrow(nameServiceRef.in());
 
 		CONSOLE("Construct servant");
-		HelloImpl* helloImpl = new HelloImpl();
+		EchoImpl* echoImpl = new EchoImpl();
 
-		CONSOLE("A ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("A ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		CONSOLE("Activate servant in POA");
-		PortableServer::ObjectId_var helloImplId = rootPOA->activate_object(helloImpl);
+		PortableServer::ObjectId_var echoImplId = rootPOA->activate_object(echoImpl);
 
-		CONSOLE("B ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("B ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		{
 			CONSOLE("Remove servant reference");
-			PortableServer::ServantBase_var _cleanup = helloImpl;
+			PortableServer::ServantBase_var _cleanup = echoImpl;
 		}
 
-		CONSOLE("C ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("C ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		CONSOLE("Bind servant reference to NameService");
 		CosNaming::Name name;
@@ -64,8 +64,8 @@ int main(int argc, char* argv[])
 		name[0].id = "HELLO_SERVER";
 		name[0].kind = "";
 
-		CORBA::Object_var helloImplRef = rootPOA->servant_to_reference(helloImpl);
-		nameService->rebind(name, helloImplRef.in());
+		CORBA::Object_var echoImplRef = rootPOA->servant_to_reference(echoImpl);
+		nameService->rebind(name, echoImplRef.in());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 		nameService->unbind(name);
 
 		CONSOLE("Deactivate servant in POA");
-		rootPOA->deactivate_object(helloImplId);
+		rootPOA->deactivate_object(echoImplId);
 
 		sleep(1);
 

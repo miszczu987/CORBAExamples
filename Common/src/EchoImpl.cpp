@@ -1,4 +1,4 @@
-#include "HelloImpl.hpp"
+#include <EchoImpl.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -8,17 +8,17 @@
 #define CONSOLE(coutExpr)		std::cout << coutExpr << std::endl
 
 
-HelloImpl::HelloImpl()
+EchoImpl::EchoImpl()
 {
-	CONSOLE("HelloImpl CONSTRUCTOR");
+	CONSOLE("EchoImpl CONSTRUCTOR");
 }
 
-HelloImpl::~HelloImpl()
+EchoImpl::~EchoImpl()
 {
-	CONSOLE("HelloImpl DESTRUCTOR");
+	CONSOLE("EchoImpl DESTRUCTOR");
 }
 
-char* HelloImpl::sendMsg(const char* message)
+char* EchoImpl::sendMsg(const char* message)
 {
 	CONSOLE("Client says: " << message);
 
@@ -34,7 +34,7 @@ char* HelloImpl::sendMsg(const char* message)
 	return CORBA::string_dup(result.c_str());
 }
 
-void HelloImpl::fillPersonDataSeq(::CORBA::ULong size, ::CORBAHello::PersonDataSeq_out dataSeq)
+void EchoImpl::fillPersonDataSeq(::CORBA::ULong size, ::CORBAHello::PersonDataSeq_out dataSeq)
 {
 	CONSOLE("Filling data for " << size << " persons");
 

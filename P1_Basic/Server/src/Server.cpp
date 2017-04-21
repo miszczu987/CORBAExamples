@@ -1,7 +1,7 @@
 #include <tao/corba.h>
 #include <tao/PortableServer/PortableServer.h>
 
-#include <HelloImpl.hpp>
+#include <EchoImpl.hpp>
 
 #include <exception>
 #include <iostream>
@@ -37,28 +37,28 @@ int main(int argc, char* argv[])
 		PortableServer::POAManager_var poaManager = rootPOA->the_POAManager();
 
 		CONSOLE("Construct servant");
-		HelloImpl* helloImpl = new HelloImpl();
+		EchoImpl* echoImpl = new EchoImpl();
 
-		CONSOLE("A ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("A ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		CONSOLE("Activate servant in POA");
-		PortableServer::ObjectId_var helloImplId = rootPOA->activate_object(helloImpl);
+		PortableServer::ObjectId_var echoImplId = rootPOA->activate_object(echoImpl);
 
-		CONSOLE("B ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("B ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		{
 			CONSOLE("Remove servant reference");
-			PortableServer::ServantBase_var _cleanup = helloImpl;
+			PortableServer::ServantBase_var _cleanup = echoImpl;
 		}
 
-		CONSOLE("C ---> Servant REFCOUNT=" << helloImpl->_refcount_value());
+		CONSOLE("C ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
 
-		CORBA::Object_var helloImplRef = rootPOA->servant_to_reference(helloImpl);
-		CORBA::String_var helloImplIOR = theORB->object_to_string(helloImplRef);
-		CONSOLE("Servant IOR: " << helloImplIOR.in());
+		CORBA::Object_var echoImplRef = rootPOA->servant_to_reference(echoImpl);
+		CORBA::String_var echoImplIOR = theORB->object_to_string(echoImplRef);
+		CONSOLE("Servant IOR: " << echoImplIOR.in());
 
 
 		CONSOLE("Start ORB thread");
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 
 
 		CONSOLE("Deactivate servant in POA");
-		rootPOA->deactivate_object(helloImplId);
+		rootPOA->deactivate_object(echoImplId);
 
 		sleep(1);
 
