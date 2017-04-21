@@ -6,9 +6,9 @@ set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/IDL.cmake)
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/outputs.cmake)
+include(${PROJECT_SOURCE_DIR}/../config/build/CORBA.cmake)
+include(${PROJECT_SOURCE_DIR}/../config/build/IDL.cmake)
+include(${PROJECT_SOURCE_DIR}/../config/build/outputs.cmake)
 
 
 include_directories(${PROJECT_SOURCE_DIR}/include

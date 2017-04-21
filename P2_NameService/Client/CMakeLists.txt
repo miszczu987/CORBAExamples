@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.1)
 project(Client)
 
 
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/CORBA.cmake)
-include(${PROJECT_SOURCE_DIR}/../../Common/cmake/outputs.cmake)
+include(${PROJECT_SOURCE_DIR}/../../config/build/CORBA.cmake)
+include(${PROJECT_SOURCE_DIR}/../../config/build/outputs.cmake)
 
 
 include_directories(${CORBA_INCLUDE})

@@ -8,7 +8,7 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 #set(CMAKE_CXX_STANDARD 11)
 
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/../Common/Common ${PROJECT_BINARY_DIR}/Common)
+add_subdirectory(${PROJECT_SOURCE_DIR}/../Common ${PROJECT_BINARY_DIR}/Common)
 add_subdirectory(Server)
 add_subdirectory(Client)
 
