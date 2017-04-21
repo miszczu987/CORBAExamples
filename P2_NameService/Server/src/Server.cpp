@@ -51,10 +51,8 @@ int main(int argc, char* argv[])
 
 		CONSOLE("B ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
-		{
-			CONSOLE("Remove servant reference");
-			PortableServer::ServantBase_var _cleanup = echoImpl;
-		}
+		CONSOLE("Remove servant reference");
+		echoImpl->_remove_ref();
 
 		CONSOLE("C ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
 
@@ -64,8 +62,8 @@ int main(int argc, char* argv[])
 		name[0].id = "HELLO_SERVER";
 		name[0].kind = "";
 
-		CORBA::Object_var echoImplRef = rootPOA->servant_to_reference(echoImpl);
-		nameService->rebind(name, echoImplRef.in());
+		CORBA::Object_var echoRef = rootPOA->servant_to_reference(echoImpl);
+		nameService->rebind(name, echoRef.in());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
