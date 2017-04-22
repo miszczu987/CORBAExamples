@@ -1,7 +1,8 @@
 #include <tao/corba.h>
 
 #include <CORBAHello.h>
-#include <Constants.hpp>
+
+#include <ClientCalls.hpp>
 #include <Logger.hpp>
 
 #include <iostream>
@@ -27,23 +28,8 @@ int main(int argc, char* argv[])
 		CORBAHello::Echo_var server = CORBAHello::Echo::_narrow(serverRef.in());
 
 
-		CORBA::String_var message = constants::HELLO_FROM_CLIENT.c_str();
-		CONSOLE("Send message to Server: " << message.in());
-
-		CORBA::String_var response = server->sendMsg(message.in());
-		CONSOLE("Response from Server: " << response.in());
-
-
-		CORBAHello::PersonDataSeq_var personData;
-
-		CONSOLE("Request filling data for " << constants::PERSON_AMOUNT << " persons");
-		server->fillPersonDataSeq(constants::PERSON_AMOUNT, personData.out());
-
-		CONSOLE("Got data for " << personData->length() << " persons:");
-		for(CORBA::ULong i = 0; i < personData->length(); ++i)
-		{
-			CONSOLE("  -> id=" << (*personData)[i].id << ", name=" << (*personData)[i].name.in());
-		}
+		//Perform remote calls...
+		performClientCalls(server.in());
 
 
 		CONSOLE("Shutdown ORB");
