@@ -3,15 +3,13 @@
 #include <orbsvcs/CosNamingC.h>
 
 #include <EchoImpl.hpp>
+#include <Logger.hpp>
 
 #include <exception>
 #include <iostream>
 #include <string>
 
 #include <boost/thread.hpp>
-
-
-#define CONSOLE(coutExpr)		std::cout << coutExpr << std::endl
 
 
 CORBA::ORB_var theORB;

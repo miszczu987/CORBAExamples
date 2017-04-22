@@ -1,11 +1,10 @@
 #include <EchoImpl.hpp>
 
+#include <Logger.hpp>
+
 #include <iostream>
 #include <sstream>
 #include <string>
-
-
-#define CONSOLE(coutExpr)		std::cout << coutExpr << std::endl
 
 
 EchoImpl::EchoImpl()

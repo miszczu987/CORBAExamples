@@ -2,12 +2,10 @@
 #include <orbsvcs/CosNamingC.h>
 
 #include <CORBAHello.h>
+#include <Logger.hpp>
 
 #include <iostream>
 #include <string>
-
-
-#define CONSOLE(coutExpr)		std::cout << coutExpr << std::endl
 
 
 CORBA::ORB_var theORB;
