@@ -3,7 +3,6 @@
 DIR=$(readlink -f $(dirname $0))
 
 source ${DIR}/_name_service
-source ${DIR}/_name_service_${NS_PROVIDER}
 
 
 if isNSWorking
@@ -12,5 +11,17 @@ then
 	exit 1
 fi
 
-startNS
+echo "Starting NameService..."
+nohup ${NS_COMMAND} 2>/dev/null &
+sleep 0.2
+rm -f nohup.out
+
+if isNSWorking
+then
+	echo "NameService started in background (PID=$(pidof ${NS_EXE}))"
+else
+	echo "Unable to start NameService!"
+	exit 1
+fi
+
 

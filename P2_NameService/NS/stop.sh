@@ -3,7 +3,6 @@
 DIR=$(readlink -f $(dirname $0))
 
 source ${DIR}/_name_service
-source ${DIR}/_name_service_${NS_PROVIDER}
 
 
 if ! isNSWorking
@@ -12,5 +11,7 @@ then
 	exit 1
 fi
 
-stopNS
+echo "Stopping NameService..."
+kill $(pidof ${NS_EXE})
+echo "NameService stopped"
 

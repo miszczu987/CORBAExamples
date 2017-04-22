@@ -3,7 +3,6 @@
 DIR=$(readlink -f $(dirname $0))
 
 source ${DIR}/_name_service
-source ${DIR}/_name_service_${NS_PROVIDER}
 
 
 if ! isNSWorking
@@ -12,5 +11,5 @@ then
 	exit 1
 fi
 
-listNS
+tao_nslist -ORBInitRef NameService=iiop://localhost:${NS_PORT}/NameService --ior
 

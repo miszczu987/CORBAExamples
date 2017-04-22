@@ -2,8 +2,8 @@
 
 NS_PORT="33333"
 
-#Options: TAO
-NS_PROVIDER="TAO"
+NS_EXE="tao_cosnaming"
+NS_COMMAND="${NS_EXE} -ORBListenEndpoints iiop://:${NS_PORT}"
 
 
 isNSWorking()
