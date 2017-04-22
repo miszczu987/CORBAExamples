@@ -21,16 +21,10 @@ char* EchoImpl::sendMsg(const char* message)
 {
 	CONSOLE("Client says: " << message);
 
-	std::string result;
-	for(std::size_t i = 0; i < 3; ++i)
-	{
-		result.append(message);
-		result.append(" ");
-	}
+	const std::string response = "Hello from Server!";
+	CONSOLE("Response: " << response);
 
-	CONSOLE("Response: " << result);
-
-	return CORBA::string_dup(result.c_str());
+	return CORBA::string_dup(response.c_str());
 }
 
 void EchoImpl::fillPersonDataSeq(::CORBA::ULong size, ::CORBAHello::PersonDataSeq_out dataSeq)

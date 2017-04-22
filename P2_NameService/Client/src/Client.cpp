@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 		CORBA::Object_var nameServiceRef = theORB->resolve_initial_references("NameService");
 		CosNaming::NamingContext_var nameService = CosNaming::NamingContext::_narrow(nameServiceRef.in());
 
-		CONSOLE("Resolve servant reference from NameService");
+		CONSOLE("Obtain Server reference from NameService");
 		CosNaming::Name name;
 		name.length(1);
 		name[0].id = constants::ECHO_SERVER.c_str();
@@ -32,20 +32,23 @@ int main(int argc, char* argv[])
 		CORBA::Object_var serverRef = nameService->resolve(name);
 		CORBAHello::Echo_var server = CORBAHello::Echo::_narrow(serverRef.in());
 
-		CONSOLE("Send message to Server");
-		CORBA::String_var echoString = server->sendMsg("Hello from Client!");
 
-		CONSOLE("Response from Server: " << echoString.in());
+		CORBA::String_var message = constants::HELLO_FROM_CLIENT.c_str();
+		CONSOLE("Send message to Server: " << message.in());
+
+		CORBA::String_var response = server->sendMsg(message.in());
+		CONSOLE("Response from Server: " << response.in());
 
 
-		CONSOLE("Requesting filling data for 5 persons");
 		CORBAHello::PersonDataSeq_var personData;
-		server->fillPersonDataSeq(5, personData.out());
+
+		CONSOLE("Request filling data for " << constants::PERSON_AMOUNT << " persons");
+		server->fillPersonDataSeq(constants::PERSON_AMOUNT, personData.out());
 
 		CONSOLE("Got data for " << personData->length() << " persons:");
 		for(CORBA::ULong i = 0; i < personData->length(); ++i)
 		{
-			CONSOLE("  id=" << (*personData)[i].id << ", name=" << (*personData)[i].name.in());
+			CONSOLE("  -> id=" << (*personData)[i].id << ", name=" << (*personData)[i].name.in());
 		}
 
 
