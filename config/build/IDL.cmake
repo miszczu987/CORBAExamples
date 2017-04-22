@@ -2,7 +2,22 @@ set(IDL_DIR "${PROJECT_SOURCE_DIR}/idl")
 set(IDL_OUT_DIR "${PROJECT_BINARY_DIR}/idl")
 file(MAKE_DIRECTORY ${IDL_OUT_DIR})
 
-include(${CMAKE_CURRENT_LIST_DIR}/IDL_${CORBA_PROVIDER}.cmake)
+
+set(PROXY_H_SUFFIX ".h")
+set(PROXY_INL_SUFFIX ".inl")
+set(PROXY_SUFFIX ".cpp")
+
+set(SKELETON_H_SUFFIX "_skel.h")
+set(SKELETON_SUFFIX "_skel.cpp")
+
+set(IDLFLAGS "-I${IDL_DIR}"
+             "-o" "${IDL_OUT_DIR}"
+             "-hc" "${PROXY_H_SUFFIX}"
+             "-ci" "${PROXY_INL_SUFFIX}"
+             "-cs" "${PROXY_SUFFIX}"
+             "-hs" "${SKELETON_H_SUFFIX}"
+             "-ss" "${SKELETON_SUFFIX}")
+
 
 set(IDL_OUT_SUFFIXES ".h"
                      ".cpp"

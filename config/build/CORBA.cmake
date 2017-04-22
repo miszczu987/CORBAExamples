@@ -1,7 +1,20 @@
-set(CORBA_PROVIDER "TAO")
+set(CORBA_ROOT "/opt/TAO")
 
+set(CORBA_BIN "${CORBA_ROOT}/bin")
+set(CORBA_INCLUDE "${CORBA_ROOT}/include")
+set(CORBA_LIB "${CORBA_ROOT}/lib")
 
-include(${CMAKE_CURRENT_LIST_DIR}/CORBA_${CORBA_PROVIDER}.cmake)
+set(CORBA_LINK "${CORBA_LIB}/libTAO.so"
+               "${CORBA_LIB}/libTAO_Valuetype.so"
+               "${CORBA_LIB}/libTAO_PortableServer.so"
+               "${CORBA_LIB}/libTAO_IORTable.so"
+               "${CORBA_LIB}/libTAO_AnyTypeCode.so"
+               "${CORBA_LIB}/libTAO_CosEvent.so"
+               "${CORBA_LIB}/libTAO_CosNaming.so"
+               "${CORBA_LIB}/libTAO_PI.so"
+               "${CORBA_LIB}/libTAO_PI_Server.so"
+               "${CORBA_LIB}/libTAO_CodecFactory.so"
+               "${CORBA_LIB}/libACE.so")
 
-add_definitions(-DCORBA_${CORBA_PROVIDER})
+set(CIDL "${CORBA_BIN}/tao_idl")
 
