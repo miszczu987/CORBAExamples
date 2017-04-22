@@ -3,6 +3,7 @@
 #include <orbsvcs/CosNamingC.h>
 
 #include <EchoImpl.hpp>
+#include <Constants.hpp>
 #include <Logger.hpp>
 
 #include <exception>
@@ -57,7 +58,7 @@ int main(int argc, char* argv[])
 		CONSOLE("Bind servant reference to NameService");
 		CosNaming::Name name;
 		name.length(1);
-		name[0].id = "HELLO_SERVER";
+		name[0].id = constants::ECHO_SERVER.c_str();
 		name[0].kind = "";
 
 		CORBA::Object_var echoRef = rootPOA->servant_to_reference(echoImpl);

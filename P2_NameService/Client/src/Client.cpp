@@ -2,6 +2,7 @@
 #include <orbsvcs/CosNamingC.h>
 
 #include <CORBAHello.h>
+#include <Constants.hpp>
 #include <Logger.hpp>
 
 #include <iostream>
@@ -25,7 +26,7 @@ int main(int argc, char* argv[])
 		CONSOLE("Resolve servant reference from NameService");
 		CosNaming::Name name;
 		name.length(1);
-		name[0].id = "HELLO_SERVER";
+		name[0].id = constants::ECHO_SERVER.c_str();
 		name[0].kind = "";
 
 		CORBA::Object_var serverRef = nameService->resolve(name);
