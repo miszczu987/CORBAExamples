@@ -2,6 +2,7 @@
 #include <tao/PortableServer/PortableServer.h>
 #include <orbsvcs/CosNamingC.h>
 
+#include "EchoActivator.hpp"
 #include "EchoLocator.hpp"
 #include <Constants.hpp>
 #include <Logger.hpp>
@@ -11,6 +12,10 @@
 #include <string>
 
 #include <boost/thread.hpp>
+
+
+//Comment line below to use ServantActivator instead of ServantLocator
+#define USE_LOCATOR
 
 
 CORBA::ORB_var theORB;
@@ -43,7 +48,13 @@ int main(int argc, char* argv[])
 		CONSOLE("Create new POA");
 		CORBA::PolicyList policies;
 		policies.length(2);
+
+#ifdef USE_LOCATOR
 		policies[0] = rootPOA->create_servant_retention_policy(PortableServer::NON_RETAIN);
+#else
+		policies[0] = rootPOA->create_servant_retention_policy(PortableServer::RETAIN);
+#endif
+
 		policies[1] = rootPOA->create_request_processing_policy(PortableServer::USE_SERVANT_MANAGER);
 
 		PortableServer::POA_var newPOA = rootPOA->create_POA("ServantManager_POA", poaManager, policies);
@@ -58,7 +69,7 @@ int main(int argc, char* argv[])
 		PortableServer::ObjectId_var servantManagerId = PortableServer::string_to_ObjectId("Echo manager");
 		CORBA::Object_var servantManagerRef = newPOA->create_reference_with_id(servantManagerId.in(), "IDL:CORBAHello/Echo:1.0");
 
-		CONSOLE("Bind manager reference to NameService");
+		CONSOLE("Bind servant manager reference to NameService");
 		CosNaming::Name name;
 		name.length(1);
 		name[0].id = constants::ECHO_SERVER.c_str();
@@ -67,7 +78,13 @@ int main(int argc, char* argv[])
 		nameService->rebind(name, servantManagerRef.in());
 
 		CONSOLE("Set servant manager in new POA");
+
+#ifdef USE_LOCATOR
 		PortableServer::ServantManager_var echoManager = new EchoLocator();
+#else
+		PortableServer::ServantManager_var echoManager = new EchoActivator();
+#endif
+
 		newPOA->set_servant_manager(echoManager.in());
 
 		CONSOLE("Activate POAManager");
@@ -83,7 +100,7 @@ int main(int argc, char* argv[])
 
 		CONSOLE("Shutting down...");
 
-		CONSOLE("Unbind servant reference from NameService");
+		CONSOLE("Unbind servant manager reference from NameService");
 		nameService->unbind(name);
 
 		sleep(1);
