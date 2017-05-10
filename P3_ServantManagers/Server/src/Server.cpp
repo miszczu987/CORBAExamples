@@ -48,6 +48,12 @@ int main(int argc, char* argv[])
 
 		PortableServer::POA_var newPOA = rootPOA->create_POA("ServantManager_POA", poaManager, policies);
 
+		//Destroy policies...
+		for(CORBA::ULong i = 0; i < policies.length(); ++i)
+		{
+			policies[i]->destroy();
+		}
+
 		CONSOLE("Create locator reference");
 		PortableServer::ObjectId_var locatorId = PortableServer::string_to_ObjectId("Echo locator");
 		CORBA::Object_var locatorRef = newPOA->create_reference_with_id(locatorId.in(), "IDL:CORBAHello/Echo:1.0");
