@@ -54,21 +54,21 @@ int main(int argc, char* argv[])
 			policies[i]->destroy();
 		}
 
-		CONSOLE("Create locator reference");
-		PortableServer::ObjectId_var locatorId = PortableServer::string_to_ObjectId("Echo locator");
-		CORBA::Object_var locatorRef = newPOA->create_reference_with_id(locatorId.in(), "IDL:CORBAHello/Echo:1.0");
+		CONSOLE("Create servant manager reference");
+		PortableServer::ObjectId_var servantManagerId = PortableServer::string_to_ObjectId("Echo manager");
+		CORBA::Object_var servantManagerRef = newPOA->create_reference_with_id(servantManagerId.in(), "IDL:CORBAHello/Echo:1.0");
 
-		CONSOLE("Bind locator reference to NameService");
+		CONSOLE("Bind manager reference to NameService");
 		CosNaming::Name name;
 		name.length(1);
 		name[0].id = constants::ECHO_SERVER.c_str();
 		name[0].kind = "";
 
-		nameService->rebind(name, locatorRef.in());
+		nameService->rebind(name, servantManagerRef.in());
 
 		CONSOLE("Set servant manager in new POA");
-		PortableServer::ServantManager_var echoLocator = new EchoLocator();
-		newPOA->set_servant_manager(echoLocator.in());
+		PortableServer::ServantManager_var echoManager = new EchoLocator();
+		newPOA->set_servant_manager(echoManager.in());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
@@ -79,6 +79,7 @@ int main(int argc, char* argv[])
 
 		CONSOLE("Server READY. Press ENTER to exit");
 		std::cin.get();
+
 
 		CONSOLE("Shutting down...");
 
