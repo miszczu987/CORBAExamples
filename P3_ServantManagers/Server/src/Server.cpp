@@ -2,7 +2,7 @@
 #include <tao/PortableServer/PortableServer.h>
 #include <orbsvcs/CosNamingC.h>
 
-#include <EchoImpl.hpp>
+#include "EchoLocator.hpp"
 #include <Constants.hpp>
 #include <Logger.hpp>
 
@@ -40,29 +40,29 @@ int main(int argc, char* argv[])
 		CORBA::Object_var nameServiceRef = theORB->resolve_initial_references("NameService");
 		CosNaming::NamingContext_var nameService = CosNaming::NamingContext::_narrow(nameServiceRef.in());
 
-		CONSOLE("Construct servant");
-		EchoImpl* echoImpl = new EchoImpl();
+		CONSOLE("Create new POA");
+		CORBA::PolicyList policies;
+		policies.length(2);
+		policies[0] = rootPOA->create_servant_retention_policy(PortableServer::NON_RETAIN);
+		policies[1] = rootPOA->create_request_processing_policy(PortableServer::USE_SERVANT_MANAGER);
 
-		CONSOLE("A ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
+		PortableServer::POA_var newPOA = rootPOA->create_POA("ServantManager_POA", poaManager, policies);
 
-		CONSOLE("Activate servant in POA");
-		PortableServer::ObjectId_var echoImplId = rootPOA->activate_object(echoImpl);
+		CONSOLE("Create locator reference");
+		PortableServer::ObjectId_var locatorId = PortableServer::string_to_ObjectId("Echo locator");
+		CORBA::Object_var locatorRef = newPOA->create_reference_with_id(locatorId.in(), "IDL:CORBAHello/Echo:1.0");
 
-		CONSOLE("B ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
-
-		CONSOLE("Remove servant reference");
-		echoImpl->_remove_ref();
-
-		CONSOLE("C ---> Servant REFCOUNT=" << echoImpl->_refcount_value());
-
-		CONSOLE("Bind servant reference to NameService");
+		CONSOLE("Bind locator reference to NameService");
 		CosNaming::Name name;
 		name.length(1);
 		name[0].id = constants::ECHO_SERVER.c_str();
 		name[0].kind = "";
 
-		CORBA::Object_var echoRef = rootPOA->servant_to_reference(echoImpl);
-		nameService->rebind(name, echoRef.in());
+		nameService->rebind(name, locatorRef.in());
+
+		CONSOLE("Set servant manager in new POA");
+		PortableServer::ServantManager_var echoLocator = new EchoLocator();
+		newPOA->set_servant_manager(echoLocator.in());
 
 		CONSOLE("Activate POAManager");
 		poaManager->activate();
@@ -78,9 +78,6 @@ int main(int argc, char* argv[])
 
 		CONSOLE("Unbind servant reference from NameService");
 		nameService->unbind(name);
-
-		CONSOLE("Deactivate servant in POA");
-		rootPOA->deactivate_object(echoImplId);
 
 		sleep(1);
 
