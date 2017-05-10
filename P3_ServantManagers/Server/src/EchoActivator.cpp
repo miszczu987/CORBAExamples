@@ -32,6 +32,6 @@ void EchoActivator::etherealize(const PortableServer::ObjectId& oid,
 	CORBA::String_var objectId = PortableServer::ObjectId_to_string(oid);
 	CONSOLE("EchoActivator ETHEREALIZE, objectId=" << objectId);
 
-	the_servant->_remove_ref();
+	serv->_remove_ref();
 }
 
