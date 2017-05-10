@@ -20,7 +20,7 @@ PortableServer::Servant EchoLocator::preinvoke(	const PortableServer::ObjectId& 
 												PortableServer::ServantLocator::Cookie& the_cookie)
 {
 	CORBA::String_var objectId = PortableServer::ObjectId_to_string(oid);
-	CONSOLE("EchoLocator PRE, objectId=" << objectId);
+	CONSOLE("EchoLocator PREINVOKE, objectId=" << objectId);
 
 	return new EchoImpl();
 }
@@ -32,7 +32,7 @@ void EchoLocator::postinvoke(	const PortableServer::ObjectId& oid,
 								PortableServer::Servant the_servant)
 {
 	CORBA::String_var objectId = PortableServer::ObjectId_to_string(oid);
-	CONSOLE("EchoLocator POST, objectId=" << objectId);
+	CONSOLE("EchoLocator POSTINVOKE, objectId=" << objectId);
 
 	the_servant->_remove_ref();
 }
