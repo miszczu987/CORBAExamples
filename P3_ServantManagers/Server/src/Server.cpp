@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 
 		policies[1] = rootPOA->create_request_processing_policy(PortableServer::USE_SERVANT_MANAGER);
 
-		PortableServer::POA_var newPOA = rootPOA->create_POA("ServantManager_POA", poaManager, policies);
+		PortableServer::POA_var newPOA = rootPOA->create_POA("ServantManager_POA", poaManager.in(), policies);
 
 		//Destroy policies...
 		for(CORBA::ULong i = 0; i < policies.length(); ++i)
