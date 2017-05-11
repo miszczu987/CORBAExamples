@@ -1,56 +1,56 @@
-#include <ClientRequestInterceptor.hpp>
+#include <ClientRequestInterceptorImpl.hpp>
 
 #include <Logger.hpp>
 
 
-ClientRequestInterceptor::ClientRequestInterceptor()
+ClientRequestInterceptorImpl::ClientRequestInterceptorImpl()
 {
-	CONSOLE("ClientRequestInterceptor CONSTRUCTOR");
+	CONSOLE("ClientRequestInterceptorImpl CONSTRUCTOR");
 }
 
-ClientRequestInterceptor::~ClientRequestInterceptor()
+ClientRequestInterceptorImpl::~ClientRequestInterceptorImpl()
 {
-	CONSOLE("ClientRequestInterceptor DESTRUCTOR");
+	CONSOLE("ClientRequestInterceptorImpl DESTRUCTOR");
 }
 
-void ClientRequestInterceptor::send_request(PortableInterceptor::ClientRequestInfo_ptr ri)
+void ClientRequestInterceptorImpl::send_request(PortableInterceptor::ClientRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ClientRequestInterceptor::send_request: operation=" << operation.in());
+	CONSOLE("ClientRequestInterceptorImpl::send_request: operation=" << operation.in());
 }
 
-void ClientRequestInterceptor::send_poll(PortableInterceptor::ClientRequestInfo_ptr ri)
+void ClientRequestInterceptorImpl::send_poll(PortableInterceptor::ClientRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ClientRequestInterceptor::send_poll: operation=" << operation.in());
+	CONSOLE("ClientRequestInterceptorImpl::send_poll: operation=" << operation.in());
 }
 
-void ClientRequestInterceptor::receive_reply(PortableInterceptor::ClientRequestInfo_ptr ri)
+void ClientRequestInterceptorImpl::receive_reply(PortableInterceptor::ClientRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ClientRequestInterceptor::receive_reply: operation=" << operation.in());
+	CONSOLE("ClientRequestInterceptorImpl::receive_reply: operation=" << operation.in());
 }
 
-void ClientRequestInterceptor::receive_exception(PortableInterceptor::ClientRequestInfo_ptr ri)
+void ClientRequestInterceptorImpl::receive_exception(PortableInterceptor::ClientRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ClientRequestInterceptor::receive_exception: operation=" << operation.in());
+	CONSOLE("ClientRequestInterceptorImpl::receive_exception: operation=" << operation.in());
 }
 
-void ClientRequestInterceptor::receive_other(PortableInterceptor::ClientRequestInfo_ptr ri)
+void ClientRequestInterceptorImpl::receive_other(PortableInterceptor::ClientRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ClientRequestInterceptor::receive_other: operation=" << operation.in());
+	CONSOLE("ClientRequestInterceptorImpl::receive_other: operation=" << operation.in());
 }
 
-char* ClientRequestInterceptor::name()
+char* ClientRequestInterceptorImpl::name()
 {
-	CONSOLE("ClientRequestInterceptor::name");
-	return CORBA::string_dup("ClientRequestInterceptor");
+	CONSOLE("ClientRequestInterceptorImpl::name");
+	return CORBA::string_dup("ClientRequestInterceptorImpl");
 }
 
-void ClientRequestInterceptor::destroy()
+void ClientRequestInterceptorImpl::destroy()
 {
-	CONSOLE("ClientRequestInterceptor::destroy");
+	CONSOLE("ClientRequestInterceptorImpl::destroy");
 }
 

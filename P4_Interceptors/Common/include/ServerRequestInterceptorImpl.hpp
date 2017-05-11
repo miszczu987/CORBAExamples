@@ -4,11 +4,11 @@
 #include <tao/PI_Server/PI_Server.h>
 
 
-struct ServerRequestInterceptor:
+struct ServerRequestInterceptorImpl:
 	PortableInterceptor::ServerRequestInterceptor
 {
-	ServerRequestInterceptor();
-	virtual ~ServerRequestInterceptor();
+	ServerRequestInterceptorImpl();
+	virtual ~ServerRequestInterceptorImpl();
 
 	virtual void receive_request_service_contexts(PortableInterceptor::ServerRequestInfo_ptr ri);
 	virtual void receive_request(PortableInterceptor::ServerRequestInfo_ptr ri);

@@ -1,56 +1,56 @@
-#include <ServerRequestInterceptor.hpp>
+#include <ServerRequestInterceptorImpl.hpp>
 
 #include <Logger.hpp>
 
 
-ServerRequestInterceptor::ServerRequestInterceptor()
+ServerRequestInterceptorImpl::ServerRequestInterceptorImpl()
 {
-	CONSOLE("ServerRequestInterceptor CONSTRUCTOR");
+	CONSOLE("ServerRequestInterceptorImpl CONSTRUCTOR");
 }
 
-ServerRequestInterceptor::~ServerRequestInterceptor()
+ServerRequestInterceptorImpl::~ServerRequestInterceptorImpl()
 {
-	CONSOLE("ServerRequestInterceptor DESTRUCTOR");
+	CONSOLE("ServerRequestInterceptorImpl DESTRUCTOR");
 }
 
-void ServerRequestInterceptor::receive_request_service_contexts(PortableInterceptor::ServerRequestInfo_ptr ri)
+void ServerRequestInterceptorImpl::receive_request_service_contexts(PortableInterceptor::ServerRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ServerRequestInterceptor::receive_request_service_contexts: operation=" << operation.in());
+	CONSOLE("ServerRequestInterceptorImpl::receive_request_service_contexts: operation=" << operation.in());
 }
 
-void ServerRequestInterceptor::receive_request(PortableInterceptor::ServerRequestInfo_ptr ri)
+void ServerRequestInterceptorImpl::receive_request(PortableInterceptor::ServerRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ServerRequestInterceptor::receive_request: operation=" << operation.in());
+	CONSOLE("ServerRequestInterceptorImpl::receive_request: operation=" << operation.in());
 }
 
-void ServerRequestInterceptor::send_reply(PortableInterceptor::ServerRequestInfo_ptr ri)
+void ServerRequestInterceptorImpl::send_reply(PortableInterceptor::ServerRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ServerRequestInterceptor::send_reply: operation=" << operation.in());
+	CONSOLE("ServerRequestInterceptorImpl::send_reply: operation=" << operation.in());
 }
 
-void ServerRequestInterceptor::send_exception(PortableInterceptor::ServerRequestInfo_ptr ri)
+void ServerRequestInterceptorImpl::send_exception(PortableInterceptor::ServerRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ServerRequestInterceptor::send_exception: operation=" << operation.in());
+	CONSOLE("ServerRequestInterceptorImpl::send_exception: operation=" << operation.in());
 }
 
-void ServerRequestInterceptor::send_other(PortableInterceptor::ServerRequestInfo_ptr ri)
+void ServerRequestInterceptorImpl::send_other(PortableInterceptor::ServerRequestInfo_ptr ri)
 {
 	CORBA::String_var operation = ri->operation();
-	CONSOLE("ServerRequestInterceptor::send_other: operation=" << operation.in());
+	CONSOLE("ServerRequestInterceptorImpl::send_other: operation=" << operation.in());
 }
 
-char* ServerRequestInterceptor::name()
+char* ServerRequestInterceptorImpl::name()
 {
-	CONSOLE("ServerRequestInterceptor::name");
-	return CORBA::string_dup("ServerRequestInterceptor");
+	CONSOLE("ServerRequestInterceptorImpl::name");
+	return CORBA::string_dup("ServerRequestInterceptorImpl");
 }
 
-void ServerRequestInterceptor::destroy()
+void ServerRequestInterceptorImpl::destroy()
 {
-	CONSOLE("ServerRequestInterceptor::destroy");
+	CONSOLE("ServerRequestInterceptorImpl::destroy");
 }
 

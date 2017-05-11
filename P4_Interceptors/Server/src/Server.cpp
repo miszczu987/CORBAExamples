@@ -7,7 +7,7 @@
 #include "EchoLocator.hpp"
 #include <Constants.hpp>
 #include <Logger.hpp>
-#include <ORBInitializer.hpp>
+#include <ORBInitializerImpl.hpp>
 
 #include <exception>
 #include <iostream>
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		CONSOLE("Register ORB initializer");
-		PortableInterceptor::ORBInitializer_var orbInitializer = new ORBInitializer();
+		PortableInterceptor::ORBInitializer_var orbInitializer = new ORBInitializerImpl();
 		PortableInterceptor::register_orb_initializer(orbInitializer.in());
 
 		CONSOLE("Initialize ORB");

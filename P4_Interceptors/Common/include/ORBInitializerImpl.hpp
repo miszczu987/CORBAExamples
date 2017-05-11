@@ -4,11 +4,11 @@
 #include <tao/PI/PI.h>
 
 
-struct ORBInitializer:
+struct ORBInitializerImpl:
 	public PortableInterceptor::ORBInitializer
 {
-	ORBInitializer();
-	virtual ~ORBInitializer();
+	ORBInitializerImpl();
+	virtual ~ORBInitializerImpl();
 
 	virtual void pre_init(PortableInterceptor::ORBInitInfo_ptr info);
 	virtual void post_init(PortableInterceptor::ORBInitInfo_ptr info);

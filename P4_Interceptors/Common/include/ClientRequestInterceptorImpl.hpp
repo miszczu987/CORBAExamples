@@ -4,11 +4,11 @@
 #include <tao/PI/PI.h>
 
 
-struct ClientRequestInterceptor:
+struct ClientRequestInterceptorImpl:
 	PortableInterceptor::ClientRequestInterceptor
 {
-	ClientRequestInterceptor();
-	virtual ~ClientRequestInterceptor();
+	ClientRequestInterceptorImpl();
+	virtual ~ClientRequestInterceptorImpl();
 
 	virtual void send_request(PortableInterceptor::ClientRequestInfo_ptr ri);
 	virtual void send_poll(PortableInterceptor::ClientRequestInfo_ptr ri);

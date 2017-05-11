@@ -1,32 +1,32 @@
-#include <ORBInitializer.hpp>
+#include <ORBInitializerImpl.hpp>
 
-#include <ServerRequestInterceptor.hpp>
-#include <ClientRequestInterceptor.hpp>
+#include <ServerRequestInterceptorImpl.hpp>
+#include <ClientRequestInterceptorImpl.hpp>
 #include <Logger.hpp>
 
 
-ORBInitializer::ORBInitializer()
+ORBInitializerImpl::ORBInitializerImpl()
 {
-	CONSOLE("ORBInitializer CONSTRUCTOR");
+	CONSOLE("ORBInitializerImpl CONSTRUCTOR");
 }
 
-ORBInitializer::~ORBInitializer()
+ORBInitializerImpl::~ORBInitializerImpl()
 {
-	CONSOLE("ORBInitializer DESTRUCTOR");
+	CONSOLE("ORBInitializerImpl DESTRUCTOR");
 }
 
-void ORBInitializer::pre_init(PortableInterceptor::ORBInitInfo_ptr info)
+void ORBInitializerImpl::pre_init(PortableInterceptor::ORBInitInfo_ptr info)
 {
-	CONSOLE("ORBInitializer::pre_init");
-	PortableInterceptor::ServerRequestInterceptor_var serverInter = new ServerRequestInterceptor();
+	CONSOLE("ORBInitializerImpl::pre_init");
+	PortableInterceptor::ServerRequestInterceptor_var serverInter = new ServerRequestInterceptorImpl();
 	info->add_server_request_interceptor(serverInter.in());
 
-	PortableInterceptor::ClientRequestInterceptor_var clientInter = new ClientRequestInterceptor();
+	PortableInterceptor::ClientRequestInterceptor_var clientInter = new ClientRequestInterceptorImpl();
 	info->add_client_request_interceptor(clientInter.in());
 }
 
-void ORBInitializer::post_init(PortableInterceptor::ORBInitInfo_ptr info)
+void ORBInitializerImpl::post_init(PortableInterceptor::ORBInitInfo_ptr info)
 {
-	CONSOLE("ORBInitializer::post_init");
+	CONSOLE("ORBInitializerImpl::post_init");
 }
 
