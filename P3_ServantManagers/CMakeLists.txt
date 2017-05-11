@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(CORBA_P2_NameService)
+project(CORBA_P3_ServantManagers)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
