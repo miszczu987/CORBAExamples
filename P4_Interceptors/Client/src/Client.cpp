@@ -1,4 +1,5 @@
 #include <tao/corba.h>
+#include <tao/ORBInitializer_Registry.h>
 #include <orbsvcs/CosNamingC.h>
 
 #include <CORBAHello.h>
@@ -6,6 +7,7 @@
 #include <ClientCalls.hpp>
 #include <Constants.hpp>
 #include <Logger.hpp>
+#include <ORBInitializer.hpp>
 
 #include <iostream>
 #include <string>
@@ -18,6 +20,10 @@ int main(int argc, char* argv[])
 {
 	try
 	{
+		CONSOLE("Register ORB initializer");
+		PortableInterceptor::ORBInitializer_var orbInitializer = new ORBInitializer();
+		PortableInterceptor::register_orb_initializer(orbInitializer.in());
+
 		CONSOLE("Initialize ORB");
 		theORB = CORBA::ORB_init(argc, argv);
 
