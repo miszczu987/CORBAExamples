@@ -63,8 +63,8 @@ int main(int argc, char* argv[])
 		CONSOLE("Server READY. Press ENTER to exit");
 		std::cin.get();
 
-		CONSOLE("Shutting down...");
 
+		CONSOLE("Shutting down...");
 
 		CONSOLE("Deactivate servant in POA");
 		rootPOA->deactivate_object(echoImplId);

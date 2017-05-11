@@ -74,6 +74,7 @@ int main(int argc, char* argv[])
 		CONSOLE("Server READY. Press ENTER to exit");
 		std::cin.get();
 
+
 		CONSOLE("Shutting down...");
 
 		CONSOLE("Unbind servant reference from NameService");
